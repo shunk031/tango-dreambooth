@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "tango-dreambooth"
+version = "0.1.0"
+description = ""
+authors = ["Shunsuke KITADA <shunsuke.kitada.0831@gmail.com>"]
+readme = "README.md"
+packages = [{include = "dreambooth"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.12"
+ai2-tango = {extras = ["all"], version = "^1.2.1"}
+diffusers = ">0.8.0"
+torchvision = "<0.15.0"
+urllib3 = "<2"
+accelerate = "^0.20.3"
+
+
+[[tool.poetry.source]]
+name = "pytorch-cu117"
+url = "https://download.pytorch.org/whl/cu117/"
+priority = "supplemental"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.0.275"
+black = "^23.3.0"
+mypy = "^1.4.1"
+pytest = "^7.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
