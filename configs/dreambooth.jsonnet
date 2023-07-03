@@ -99,6 +99,8 @@ local devices = 1;
             prompt: 'a <cat-toy> in mad max fury road',
             seed: seed,
             generated_image_path: 'cat-mad-max.png',
+            grid_rows: 2,
+            grid_cols: 4,
         },
     },
 }
