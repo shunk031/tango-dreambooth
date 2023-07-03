@@ -1,5 +1,6 @@
 from typing import Optional
 
+import torch
 from diffusers import StableDiffusionPipeline
 from PIL import Image
 from tango import Step
@@ -21,7 +22,7 @@ class GenerateNewImages(Step):
         grid_rows: int = 1,
         grid_cols: int = 4,
         num_inference_steps: int = 25,
-        guidance_scale: float = 9.0,
+        guidance_scale: float = 7.5,
     ) -> None:
         num_images_per_prompt = grid_rows * grid_cols
 
@@ -29,6 +30,7 @@ class GenerateNewImages(Step):
         device = resolve_device()
 
         pipe = pipe.to(device)
+        generator = torch.Generator().manual_seed(seed)
 
         images = pipe(
             prompt=prompt,
@@ -37,6 +39,7 @@ class GenerateNewImages(Step):
             num_images_per_prompt=num_images_per_prompt,
             num_inference_steps=num_inference_steps,
             guidance_scale=guidance_scale,
+            generator=generator,
         ).images
 
         grid = Image.new("RGB", size=(grid_cols * image_size, grid_rows * image_size))
